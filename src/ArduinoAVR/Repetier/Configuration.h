@@ -74,13 +74,14 @@ To override EEPROM settings with config settings, set EEPROM_MODE 0
 // RUMBA                      = 80  // Get it from reprapdiscount
 // FELIXprinters              = 101
 // Rambo                      = 301
+// Mega controller            = 310
 // PiBot for Repetier V1.0-1.3= 314
 // PiBot for Repetier V1.4    = 315
 // Sanguish Beta              = 501
 // Unique One rev. A          = 88
 // User layout defined in userpins.h = 999
 
-#define MOTHERBOARD 33
+#define MOTHERBOARD 310
 
 #include "pins.h"
 
@@ -1185,8 +1186,9 @@ The following settings override uiconfig.h!
 13 = SeeMeCNC Display on Rambo (ORION)
 14 = OpenHardware.co.za LCD2004 V2014
 15 = Sanguinololu + Panelolu2
+16 = Mega controller or RAMPS  + Mini Panel
 */
-#define FEATURE_CONTROLLER 0
+#define FEATURE_CONTROLLER 16
 
 /**
 Select the language to use.
@@ -1198,11 +1200,11 @@ Select the language to use.
 5 = Spanish
 6 = Swedish
 */
-#define UI_LANGUAGE 1
+#define UI_LANGUAGE 0
 
 // This is line 2 of the status display at startup. Change to your like.
-#define UI_PRINTER_NAME "Ordbot"
-#define UI_PRINTER_COMPANY "RepRapDiscount"
+#define UI_PRINTER_NAME "MeBot"
+#define UI_PRINTER_COMPANY "MakerLab.me"
 
 
 /** Animate switches between menus etc. */
@@ -1212,7 +1214,7 @@ Select the language to use.
 #define UI_PAGES_DURATION 4000
 
 /** Delay of start screen in milliseconds */
-#define UI_START_SCREEN_DELAY 1000
+#define UI_START_SCREEN_DELAY 2000
 /** Uncomment if you don't want automatic page switching. You can still switch the
 info pages with next/previous button/click-encoder */
 #define UI_DISABLE_AUTO_PAGESWITCH true
@@ -1226,7 +1228,7 @@ info pages with next/previous button/click-encoder */
 Unfotunately, the encoder have a different count of phase changes between clicks.
 Select an encoder speed from 0 = fastest to 2 = slowest that results in one menu move per click.
 */
-#define UI_ENCODER_SPEED 1
+#define UI_ENCODER_SPEED 2
 
 /* There are 2 ways to change positions. You can move by increments of 1/0.1 mm resulting in more menu entries
 and requiring many turns on your encode. The alternative is to enable speed dependent positioning. It will change

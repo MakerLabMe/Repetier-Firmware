@@ -340,6 +340,7 @@ extern const int8_t encoder_table[16] PROGMEM ;
 #define SDSUPPORT true
 #endif
 
+
 // Maximum size of a row - if row is larger, text gets scrolled
 #define MAX_COLS 28
 
@@ -1118,6 +1119,103 @@ inline void ui_check_slow_encoder() {}
 void ui_check_slow_keys(int &action) {}
 #endif
 #endif // Controller 15
+
+
+#if FEATURE_CONTROLLER==16 //Mini Panel
+#define UI_HAS_KEYS 1
+#define UI_HAS_BACK_KEY 0
+#define UI_DISPLAY_TYPE 5
+#define U8GLIB_Mini12864
+#define UI_LCD_WIDTH 128
+#define UI_LCD_HEIGHT 64
+
+//select font size
+#define UI_FONT_6X10 //default font
+#ifdef UI_FONT_6X10
+#define UI_FONT_WIDTH 6
+#define UI_FONT_HEIGHT 10
+#define UI_FONT_SMALL_HEIGHT 7
+#define UI_FONT_DEFAULT repetier_6x10
+#define UI_FONT_SMALL repetier_5x7
+#define UI_FONT_SMALL_WIDTH 5 //smaller font for status display
+#define UI_ANIMATION false  // Animations are too slow
+#endif
+
+//calculate rows and cols available with current font
+#define UI_COLS (UI_LCD_WIDTH/UI_FONT_WIDTH)
+#define UI_ROWS (UI_LCD_HEIGHT/UI_FONT_HEIGHT)
+#define UI_DISPLAY_CHARSET 3
+#define BEEPER_TYPE 1
+#if MOTHERBOARD==310 // Mega controller
+#define BEEPER_PIN             46
+#define UI_DISPLAY_DOGLCD_A0  47
+#define UI_DISPLAY_DOGLCD_CS  45
+#define UI_DISPLAY_RS_PIN      19//RS/CS
+#define UI_DISPLAY_RW_PIN      -1
+#define UI_DISPLAY_ENABLE_PIN  42//DATA_IN
+#define UI_DISPLAY_D0_PIN      18
+#define UI_DISPLAY_D1_PIN      38
+#define UI_DISPLAY_D2_PIN      41
+#define UI_DISPLAY_D3_PIN      40
+#define UI_DISPLAY_D4_PIN      18//CLK
+#define UI_DISPLAY_D5_PIN      38
+#define UI_DISPLAY_D6_PIN      41
+#define UI_DISPLAY_D7_PIN      40
+#define UI_ENCODER_A           48
+#define UI_ENCODER_B           11
+#define UI_ENCODER_CLICK       10
+#define UI_RESET_PIN           12
+#undef SDCARDDETECT
+#define SDCARDDETECT 49
+#undef SDCARDDETECTINVERTED
+#define SDCARDDETECTINVERTED false
+#undef SDSUPPORT
+#define SDSUPPORT true
+#define CASE_LIGHTS_PIN 44
+#define CASE_LIGHT_DEFAULT_ON 1
+#else//RAMPS
+#define BEEPER_PIN             42
+#define UI_DISPLAY_DOGLCD_A0   44
+#define UI_DISPLAY_DOGLCD_CS   66
+#define UI_DISPLAY_RS_PIN      45
+#define UI_DISPLAY_RW_PIN      -1
+#define UI_DISPLAY_ENABLE_PIN  17
+#define UI_DISPLAY_D0_PIN      23
+#define UI_DISPLAY_D1_PIN      25
+#define UI_DISPLAY_D2_PIN      27
+#define UI_DISPLAY_D3_PIN      29
+#define UI_DISPLAY_D4_PIN      23
+#define UI_DISPLAY_D5_PIN      25
+#define UI_DISPLAY_D6_PIN      27
+#define UI_DISPLAY_D7_PIN      29
+#define UI_ENCODER_A           40
+#define UI_ENCODER_B           63
+#define UI_ENCODER_CLICK       59
+#define UI_RESET_PIN           41
+#undef SDCARDDETECT
+#define SDCARDDETECT 49
+#undef SDCARDDETECTINVERTED
+#define SDCARDDETECTINVERTED false
+#undef SDSUPPORT
+#define SDSUPPORT true
+#endif
+#define UI_DELAYPERCHAR 320
+#define UI_INVERT_MENU_DIRECTION false
+#ifdef UI_MAIN
+void ui_init_keys() {
+  UI_KEYS_INIT_CLICKENCODER_LOW(UI_ENCODER_A,UI_ENCODER_B); // click encoder on pins 47 and 45. Phase is connected with gnd for signals.
+  UI_KEYS_INIT_BUTTON_LOW(UI_ENCODER_CLICK); // push button, connects gnd to pin
+  UI_KEYS_INIT_BUTTON_LOW(UI_RESET_PIN); // Kill pin
+}
+void ui_check_keys(int &action) {
+ UI_KEYS_CLICKENCODER_LOW_REV(UI_ENCODER_A,UI_ENCODER_B); // click encoder on pins 47 and 45. Phase is connected with gnd for signals.
+ UI_KEYS_BUTTON_LOW(UI_ENCODER_CLICK,UI_ACTION_OK); // push button, connects gnd to pin
+ UI_KEYS_BUTTON_LOW(UI_RESET_PIN,UI_ACTION_RESET);
+}
+inline void ui_check_slow_encoder() {}
+void ui_check_slow_keys(int &action) {}
+#endif
+#endif // Controller 2 and 10
 
 #if FEATURE_CONTROLLER>0
 #if UI_ROWS==4

@@ -1965,6 +1965,144 @@ S3(ext)=9
 
 #endif
 
+/****************************************************************************************
+* Mega Controller v0.1
+*
+****************************************************************************************/
+#if MOTHERBOARD == 310
+ #define KNOWN_BOARD 1
+
+
+ #ifndef __AVR_ATmega2560__
+ #error Oops! Make sure you have 'Arduino Mega' selected from the 'Tools -> Boards' menu.
+ #endif
+
+ #define LARGE_FLASH        true
+
+ #define ORIG_X_STEP_PIN 62//A8
+ #define ORIG_X_DIR_PIN 63//A9
+ #define ORIG_X_ENABLE_PIN 61//A7
+#ifdef DELTA
+ #define ORIG_X_MIN_PIN -1
+#else
+ #define ORIG_X_MIN_PIN 43
+#endif //DELTA
+ #define ORIG_X_MAX_PIN 42 //2 //Max endstops default to disabled "-1", set to commented value to enable.
+
+ #define ORIG_Y_STEP_PIN 65 // A11
+ #define ORIG_Y_DIR_PIN 66 // A12
+ #define ORIG_Y_ENABLE_PIN 64//A10
+#ifdef DELTA
+ #define ORIG_Y_MIN_PIN -1
+#else
+ #define ORIG_Y_MIN_PIN 38
+#endif //DELTA
+ #define ORIG_Y_MAX_PIN 41 //15
+
+ #define ORIG_Z_STEP_PIN 68 // A14
+ #define ORIG_Z_DIR_PIN 69 // A15
+ #define ORIG_Z_ENABLE_PIN 67 // A13
+ #define ORIG_Z_MIN_PIN 40
+ #define ORIG_Z_MAX_PIN 37
+
+ #define ORIG_E0_STEP_PIN 23
+ #define ORIG_E0_DIR_PIN 24
+ #define ORIG_E0_ENABLE_PIN 22
+
+ #define ORIG_E1_STEP_PIN 26
+ #define ORIG_E1_DIR_PIN 27
+ #define ORIG_E1_ENABLE_PIN 25
+
+ #define SDPOWER -1
+ #define SDSS 53
+ #define LED_PIN 13
+ #define SCK_PIN          52
+ #define MISO_PIN         50
+ #define MOSI_PIN         51
+
+ #define ORIG_FAN_PIN 39
+ #define ORIG_FAN1_PIN 35
+ #define ORIG_FAN2_PIN 36
+ #define CONTROLLERFAN_PIN 36
+ #define PS_ON_PIN -1
+
+ #define HEATER_0_PIN 29 // EXTRUDER 1
+ #define HEATER_1_PIN 28// Bed
+ #define HEATER_2_PIN 34 // EXTRUDER 2
+
+ #if TEMP_SENSOR_0 == -1
+   #define TEMP_0_PIN 4 // ANALOG NUMBERING
+ #else
+   #define TEMP_0_PIN 0 // ANALOG NUMBERING
+ #endif
+
+
+ #if TEMP_SENSOR_1 == -1
+   #define TEMP_1_PIN 5 // ANALOG NUMBERING
+ #else
+   #define TEMP_1_PIN 1 // Bed ANALOG NUMBERING
+ #endif
+
+ #define TEMP_2_PIN 3 // ANALOG NUMBERING
+
+ #define HEATER_BED_PIN 28 // BED
+
+ #if TEMP_SENSOR_BED == -1
+   #define TEMP_BED_PIN 6 // ANALOG NUMBERING
+ #else
+   #define TEMP_BED_PIN 1 // ANALOG NUMBERING
+ #endif
+ 
+ #define E0_PINS ORIG_E0_STEP_PIN,ORIG_E0_DIR_PIN,ORIG_E0_ENABLE_PIN,
+ #define E1_PINS ORIG_E1_STEP_PIN,ORIG_E1_DIR_PIN,ORIG_E1_ENABLE_PIN,
+
+ #ifdef NUM_SERVOS
+    #define SERVO0_PIN         30
+
+    #if NUM_SERVOS > 1
+      #define SERVO1_PIN         31
+    #endif
+
+    #if NUM_SERVOS > 2
+      #define SERVO2_PIN         32
+    #endif
+
+    #if NUM_SERVOS > 3
+      #define SERVO3_PIN         33
+    #endif
+  #endif
+
+ #ifdef MINIPANEL
+     #define BEEPER 46
+     // Pins for DOGM SPI LCD Support
+     #define DOGLCD_A0  47
+     #define DOGLCD_CS  45
+     #define LCD_PIN_BL	44	// backlight LED on PA3
+     
+     #define KILL_PIN 12
+     // GLCD features
+     //#define LCD_CONTRAST 190
+     // Uncomment screen orientation
+       // #define LCD_SCREEN_ROT_90
+       // #define LCD_SCREEN_ROT_180
+       // #define LCD_SCREEN_ROT_270
+     //The encoder and click button
+     #define BTN_EN1 48
+     #define BTN_EN2 11
+     #define BTN_ENC 10  //the click switch
+     //not connected to a pin
+     #define SDCARDDETECT 49
+ #endif //Minipanel
+
+
+   //encoder rotation values
+ #define encrot0 0
+ #define encrot1 2
+ #define encrot2 3
+ #define encrot3 1
+
+#endif
+
 
 /***************************************************************************************
 *PiBot for Repetier pins assignment

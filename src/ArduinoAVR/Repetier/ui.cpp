@@ -652,6 +652,11 @@ void initializeLCD()
 #define UI_SPI_MOSI UI_DISPLAY_ENABLE_PIN
 #define UI_SPI_CS UI_DISPLAY_RS_PIN
 #endif
+#ifdef U8GLIB_Mini12864
+#define UI_SPI_SCK UI_DISPLAY_D4_PIN
+#define UI_SPI_MOSI UI_DISPLAY_ENABLE_PIN
+#define UI_SPI_CS UI_DISPLAY_RS_PIN
+#endif
 #include "u8glib_ex.h"
 u8g_t u8g;
 u8g_uint_t u8_tx = 0, u8_ty = 0;
@@ -733,6 +738,10 @@ void initializeLCD()
 #ifdef U8GLIB_ST7920
 //U8GLIB_ST7920_128X64_1X u8g(UI_DISPLAY_D4_PIN, UI_DISPLAY_ENABLE_PIN, UI_DISPLAY_RS_PIN);
     u8g_InitSPI(&u8g,&u8g_dev_st7920_128x64_sw_spi,  UI_DISPLAY_D4_PIN, UI_DISPLAY_ENABLE_PIN, UI_DISPLAY_RS_PIN, U8G_PIN_NONE, U8G_PIN_NONE);
+#endif
+#ifdef U8GLIB_Mini12864
+//U8GLIB_ST7920_128X64_1X u8g(UI_DISPLAY_D4_PIN, UI_DISPLAY_ENABLE_PIN, UI_DISPLAY_RS_PIN);
+    u8g_InitHWSPI(&u8g,&u8g_dev_uc1701_mini12864_hw_spi,  UI_DISPLAY_DOGLCD_CS, UI_DISPLAY_DOGLCD_A0, U8G_PIN_NONE);
 #endif
     u8g_Begin(&u8g);
     //u8g.firstPage();
