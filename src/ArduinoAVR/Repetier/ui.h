@@ -1198,6 +1198,8 @@ void ui_check_slow_keys(int &action) {}
 #define SDCARDDETECTINVERTED false
 #undef SDSUPPORT
 #define SDSUPPORT true
+#define CASE_LIGHTS_PIN 65
+#define CASE_LIGHT_DEFAULT_ON 1
 #endif
 #define UI_DELAYPERCHAR 320
 #define UI_INVERT_MENU_DIRECTION false
