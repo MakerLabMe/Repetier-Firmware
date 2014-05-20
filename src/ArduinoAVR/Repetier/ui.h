@@ -1191,7 +1191,7 @@ void ui_check_slow_keys(int &action) {}
 #define UI_ENCODER_A           40
 #define UI_ENCODER_B           63
 #define UI_ENCODER_CLICK       59
-#define UI_RESET_PIN           41
+#define UI_RESET_PIN           64
 #undef SDCARDDETECT
 #define SDCARDDETECT 49
 #undef SDCARDDETECTINVERTED
